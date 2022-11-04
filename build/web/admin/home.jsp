@@ -12,6 +12,12 @@
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
+        <%
+         String nomeUsuario = (String) session.getAttribute("NomeUsuario");
+            if(nomeUsuario == null ){
+                response.sendRedirect("index.jsp?erro=3");
+            }
+        %>
         <jsp:include page="includes/nav.jsp" />
         <div id="layoutSidenav">
             <jsp:include page="includes/sidenav.jsp" />

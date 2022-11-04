@@ -24,9 +24,9 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Dashboard</h1>
+                        <h1 class="mt-4">Usuários</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Dashboard</li>
+                            <li class="breadcrumb-item active">Gerenciar Usuários</li>
                         </ol>
                     </div>
                 </main>
@@ -42,3 +42,4 @@
         <script src="js/datatables-simple-demo.js"></script>
     </body>
 </html>
+
