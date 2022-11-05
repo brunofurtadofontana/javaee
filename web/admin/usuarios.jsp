@@ -13,8 +13,8 @@
     </head>
     <body class="sb-nav-fixed">
         <%
-         String nomeUsuario = (String) session.getAttribute("NomeUsuario");
-            if(nomeUsuario == null ){
+            String nomeUsuario = (String) session.getAttribute("NomeUsuario");
+            if (nomeUsuario == null) {
                 response.sendRedirect("index.jsp?erro=3");
             }
         %>
@@ -28,6 +28,65 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Gerenciar Usuários</li>
                         </ol>
+                    </div>
+                    <div class="container-fluid px-4">
+                        <small>Formulário de cadastro de usuários</small>
+                        <form action="cadastraUsuarios.jsp" method="POST">
+                            <div class="mb-3">
+                                <label class="form-label">Nome</label>
+                                <input type="text" class="form-control" name="nome" placeholder="Informe seu nome" />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" name="email" placeholder="Informe seu Email" />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Telefone</label>
+                                <input type="text" class="form-control" name="telefone" placeholder="Informe seu Telefone" />
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Senha</label>
+                                <input type="password" class="form-control" name="senha" placeholder="Informe uma senha" />
+                            </div>
+                            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                        </form>
+                    </div>
+                    <div class="container-fluid px-4">
+                        <hr>
+                        <small>Usuários cadastrados</small>
+                        <hr>
+                        <table id="datatablesSimple">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Telefone</th>
+                                    <th>Senha</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Email</th>
+                                    <th>Telefone</th>
+                                    <th>Senha</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <tr>
+                                    <td>Tiger Nixon</td>
+                                    <td>System Architect</td>
+                                    <td>Edinburgh</td>
+                                    <td>61</td>
+                                    <td>
+                                        <a href="" class="text-info" ><i class="fa fa-pencil-square"></i></a>
+                                        <a href="" class="text-danger" ><i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </main>
                 <jsp:include page="includes/footer.jsp" />

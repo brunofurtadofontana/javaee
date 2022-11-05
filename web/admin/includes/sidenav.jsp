@@ -17,7 +17,6 @@
                         <div class="small">Logged in as:</div>
                         <%
                             String nomeUsuario = (String) session.getAttribute("NomeUsuario");
-       
                             out.print(nomeUsuario);
                         %>
                     </div>

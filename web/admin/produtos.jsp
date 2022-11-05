@@ -26,8 +26,67 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Produtos</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Gerenciar Produtos</li>
+                            <li class="breadcrumb-item active">Cadastrar Produtos</li>
                         </ol>
+                    </div>
+                    <div class="container-fluid px-4">
+                        <small>Formulário de cadastro de produtos</small>
+                        <form action="cadastraProdutos.jsp" method="POST" enctype="multpart/form-data">
+                            <div class="mb-3">
+                                <label class="form-label">Nome do produto</label>
+                                <input type="text" class="form-control" name="nome" placeholder="Nome do produto"/> 
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Descrição</label>
+                                <input type="text" class="form-control" name="desc" placeholder="Descrição do produto"/> 
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Valor do produto</label>
+                                <input type="text" class="form-control" name="valor" placeholder="Valor do produto"/> 
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Imagem do produto</label>
+                                <input type="file" class="form-control" name="files[]" multiple /> 
+                            </div>
+                            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                        </form>
+                    </div>
+                    <div class="container-fluid px-4">
+                        <hr>
+                        <small>Produtos cadastrados</small>
+                        <hr>
+                        <table id="datatablesSimple">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Descrição</th>
+                                    <th>Valor</th>
+                                    <th>imagem</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Descrição</th>
+                                    <th>Valor</th>
+                                    <th>imagem</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <tr>
+                                    <td>Geladeira</td>
+                                    <td>Brastemp</td>
+                                    <td>1.900,99</td>
+                                    <td> <img src="" width="100" /> </td>
+                                    <td>
+                                        <a href="" class="text-info" ><i class="fa fa-pencil-square"></i></a>
+                                        <a href="" class="text-danger" ><i class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </main>
                 <jsp:include page="includes/footer.jsp" />
