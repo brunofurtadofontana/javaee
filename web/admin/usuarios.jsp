@@ -31,7 +31,7 @@
                     </div>
                     <div class="container-fluid px-4">
                         <small>Formulário de cadastro de usuários</small>
-                        <form action="cadastraUsuarios.jsp" method="POST">
+                        <form action="config/cadastraUsuarios.jsp" method="POST">
                             <div class="mb-3">
                                 <label class="form-label">Nome</label>
                                 <input type="text" class="form-control" name="nome" placeholder="Informe seu nome" />
@@ -75,6 +75,9 @@
                                 </tr>
                             </tfoot>
                             <tbody>
+                                <% 
+                                    
+                                %>
                                 <tr>
                                     <td>Tiger Nixon</td>
                                     <td>System Architect</td>
@@ -85,6 +88,7 @@
                                         <a href="" class="text-danger" ><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
+                                
                             </tbody>
                         </table>
                     </div>

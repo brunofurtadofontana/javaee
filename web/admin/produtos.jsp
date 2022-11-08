@@ -31,7 +31,7 @@
                     </div>
                     <div class="container-fluid px-4">
                         <small>Formulário de cadastro de produtos</small>
-                        <form action="cadastraProdutos.jsp" method="POST" enctype="multpart/form-data">
+                        <form action="getForm.jsp" method="POST" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label class="form-label">Nome do produto</label>
                                 <input type="text" class="form-control" name="nome" placeholder="Nome do produto"/> 
@@ -46,7 +46,7 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Imagem do produto</label>
-                                <input type="file" class="form-control" name="files[]" multiple /> 
+                                <input type="file" class="form-control" name="file[]" multiple /> 
                             </div>
                             <button type="submit" class="btn btn-primary">Cadastrar</button>
                         </form>
