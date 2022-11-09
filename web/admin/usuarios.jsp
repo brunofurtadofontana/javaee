@@ -1,3 +1,6 @@
+<%@ page import= "java.sql.*" %>
+<%@ page import="org.postgresql.Driver" %>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -76,18 +79,36 @@
                             </tfoot>
                             <tbody>
                                 <% 
+                                    Connection con = null;
+                                    Statement st = null;
+                                    ResultSet rs = null;
+
+                                    String url = "jdbc:postgresql://localhost:5432/website";
+                                    String usuario = "postgres";
+                                    String senhaBD = "admin";  
+                                    try{
+                                         Class.forName("org.postgresql.Driver");
+                                         con = DriverManager.getConnection(url,usuario,senhaBD);
+                                         st = con.createStatement();
+                                         rs = st.executeQuery("SELECT *FROM usuarios ORDER BY nome ASC");
+                                         while(rs.next()){ %>
+                                         <tr>
+                                             <td><%= rs.getString("nome") %></td>
+                                             <td><%= rs.getString("email") %></td>
+                                             <td><%= rs.getString("telefone") %></td>
+                                             <td><%= rs.getString("senha") %></td>
+                                             <td>
+                                                 <a href="editarUsuario.jsp?id=<%=rs.getString("id")%>" class="text-info" ><i class="fa fa-pencil-square"></i></a>
+                                                 <a href="" class="text-danger" ><i class="fa fa-trash"></i></a>
+                                             </td>
+                                         </tr>
                                     
+                                     <%    }
+                                    }catch(Exception e){
+                                        out.print(e);
+                                    }
                                 %>
-                                <tr>
-                                    <td>Tiger Nixon</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>61</td>
-                                    <td>
-                                        <a href="" class="text-info" ><i class="fa fa-pencil-square"></i></a>
-                                        <a href="" class="text-danger" ><i class="fa fa-trash"></i></a>
-                                    </td>
-                                </tr>
+                               
                                 
                             </tbody>
                         </table>
