@@ -49,7 +49,7 @@
                             while(rs.next()){ %>
                                 <div class="container-fluid px-4">
                                     <small>Formulário de atualização de usuários</small>
-                                    <form action="config/editarUsuario.jsp" method="POST">
+                                    <form action="config/editarUsuario.jsp?id=<%=rs.getString("id")%>" method="POST">
                                         <div class="mb-3">
                                             <label class="form-label">Nome</label>
                                             <input type="text" class="form-control" value="<%=rs.getString("nome")%>" name="nome" placeholder="Informe seu nome" />
@@ -66,7 +66,7 @@
                                             <label class="form-label">Senha</label>
                                             <input type="password" class="form-control" value="<%=rs.getString("senha")%>" name="senha" placeholder="Informe uma senha" />
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                                        <button type="submit" class="btn btn-primary">Atualizar</button>
                                     </form>
                                 </div>
                             

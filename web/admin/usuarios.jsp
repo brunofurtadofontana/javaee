@@ -91,17 +91,37 @@
                                          con = DriverManager.getConnection(url,usuario,senhaBD);
                                          st = con.createStatement();
                                          rs = st.executeQuery("SELECT *FROM usuarios ORDER BY nome ASC");
-                                         while(rs.next()){ %>
+                                         while(rs.next()){ 
+                                            String id = rs.getString("id");
+                                        %>
                                          <tr>
                                              <td><%= rs.getString("nome") %></td>
                                              <td><%= rs.getString("email") %></td>
                                              <td><%= rs.getString("telefone") %></td>
                                              <td><%= rs.getString("senha") %></td>
                                              <td>
-                                                 <a href="editarUsuario.jsp?id=<%=rs.getString("id")%>" class="text-info" ><i class="fa fa-pencil-square"></i></a>
-                                                 <a href="" class="text-danger" ><i class="fa fa-trash"></i></a>
+                                                 <a href="editarUsuario.jsp?id=<% out.print(id) ; %>" class="text-info" ><i class="fa fa-pencil-square"></i></a>
+                                                 <a href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModal<% out.print(id); %>" ><i class="fa fa-trash"></i></a>
                                              </td>
                                          </tr>
+                                         <!-- Modal Excluir -->
+                                            <div class="modal fade" id="exampleModal<% if(id==id)out.print(id); %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                              <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                  <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir usuário</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                    Tem certeza que deseja excluir <%=rs.getString("nome")%> ??
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                    <a href="usuarios.jsp?funcao=excluir&id=<%=rs.getString(1)%>" class="btn btn-danger">Excluir</a>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
                                     
                                      <%    }
                                     }catch(Exception e){
@@ -113,6 +133,20 @@
                             </tbody>
                         </table>
                     </div>
+                   <%
+                        if(request.getParameter("funcao")!= null && request.getParameter("funcao").equals("excluir")){
+                            String id = request.getParameter("id");
+                            try{
+                                Class.forName("org.postgresql.Driver");
+                                con = DriverManager.getConnection(url,usuario,senhaBD);
+                                st = con.createStatement();
+                                st.executeUpdate("DELETE from usuarios WHERE id = '"+id+"' ");
+                                response.sendRedirect("usuarios.jsp?status=3");//Registro deletado com sucesso
+                            }catch(Exception e){
+                                out.println(e);
+                            }
+                        }
+                    %>                 
                 </main>
                 <jsp:include page="includes/footer.jsp" />
             </div>
