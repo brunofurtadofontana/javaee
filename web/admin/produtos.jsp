@@ -31,7 +31,7 @@
                     </div>
                     <div class="container-fluid px-4">
                         <small>Formulário de cadastro de produtos</small>
-                        <form action="getForm.jsp" method="POST" enctype="multipart/form-data">
+                        <form action="config/cadastraProduto.jsp" method="POST" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label class="form-label">Nome do produto</label>
                                 <input type="text" class="form-control" name="nome" placeholder="Nome do produto"/> 
@@ -89,6 +89,7 @@
                         </table>
                     </div>
                 </main>
+              
                 <jsp:include page="includes/footer.jsp" />
             </div>
         </div>

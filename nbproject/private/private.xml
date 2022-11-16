@@ -5,9 +5,10 @@
         <group>
             <file>file:/C:/Users/Alunos/Documents/WebSite/web/admin/config/cadastraUsuarios.jsp</file>
             <file>file:/C:/Users/Alunos/Documents/WebSite/web/admin/config/trataLogin.jsp</file>
+            <file>file:/C:/Users/Alunos/Documents/WebSite/src/java/util/Upload.java</file>
             <file>file:/C:/Users/Alunos/Documents/WebSite/web/admin/produtos.jsp</file>
-            <file>file:/C:/Users/Alunos/Documents/WebSite/web/admin/editarUsuario.jsp</file>
-            <file>file:/C:/Users/Alunos/Documents/WebSite/web/index.jsp</file>
+            <file>file:/C:/Users/Alunos/Documents/WebSite/web/META-INF/context.xml</file>
+            <file>file:/C:/Users/Alunos/Documents/WebSite/web/admin/config/cadastraProduto.jsp</file>
             <file>file:/C:/Users/Alunos/Documents/WebSite/web/admin/usuarios.jsp</file>
             <file>file:/C:/Users/Alunos/Documents/WebSite/web/admin/config/editarUsuario.jsp</file>
         </group>
