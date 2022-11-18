@@ -3,7 +3,8 @@
     Created on : 31 de out. de 2022, 19:45:17
     Author     : Alunos
 --%>
-
+<%@ page import="java.sql.*" %>
+<%@ page import="org.postgresql.Driver" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,42 +26,41 @@
         <section class="box">
             <h2>Produtos</h2>
             <div class="row row-cols-1 row-cols-md-4 g-4">
-                <div class="col">
-                  <div class="card">
-                    <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card">
-                    <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card">
-                    <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="card">
-                    <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                  </div>
-                </div>
+                <%
+                Connection con = null;
+                Statement st = null;
+                ResultSet rs = null;
+
+                String url = "jdbc:postgresql://localhost:5432/website";
+                String usuario = "postgres";
+                String senhaBD = "admin";
+                try{
+                    Class.forName("org.postgresql.Driver");
+                    con = DriverManager.getConnection(url,usuario,senhaBD);
+                    st = con.createStatement();
+                    rs = st.executeQuery("SELECT *FROM produtos ORDER BY id DESC");
+                    while(rs.next()){
+                        String id = rs.getString("id");
+                    %>    
+                    <div class="col">
+                        <div class="card">
+                          <img style="width:100%;height:200px;object-fit:cover;" src="arquivos/<%=rs.getString("imagem") %>" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <h5 class="card-title"><%=rs.getString("nome") %></h5>
+                            <p class="card-text"><%=rs.getString("descricao") %></p>
+                            <hr>
+                            <p style="color:red;font-size:20px;text-align:center;">R$<%=rs.getString("valor")%></p>
+                            <button class="btn btn-warning" style="width:100%;">Comprar</button>
+                          </div>
+                        </div>
+                      </div>
+                <%    }
+                }catch(Exception e){
+                    out.print(e);
+                }
+                
+                %>
+                
               </div>
         </section>
         <jsp:include page="includes/footer.jsp" />

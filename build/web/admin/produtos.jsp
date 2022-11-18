@@ -1,3 +1,6 @@
+<%@ page import="java.sql.*" %>
+<%@ page import="org.postgresql.Driver" %>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -75,16 +78,39 @@
                                 </tr>
                             </tfoot>
                             <tbody>
-                                <tr>
-                                    <td>Geladeira</td>
-                                    <td>Brastemp</td>
-                                    <td>1.900,99</td>
-                                    <td> <img src="" width="100" /> </td>
-                                    <td>
-                                        <a href="" class="text-info" ><i class="fa fa-pencil-square"></i></a>
-                                        <a href="" class="text-danger" ><i class="fa fa-trash"></i></a>
-                                    </td>
-                                </tr>
+                                <% 
+                                    Connection con = null;
+                                    Statement st = null;
+                                    ResultSet rs = null;
+
+                                    String url = "jdbc:postgresql://localhost:5432/website";
+                                    String usuario = "postgres";
+                                    String senhaBD = "admin";
+                                    try{
+                                        Class.forName("org.postgresql.Driver");
+                                         con = DriverManager.getConnection(url,usuario,senhaBD);
+                                         st = con.createStatement();
+                                         rs = st.executeQuery("SELECT *FROM produtos ORDER BY id DESC");
+                                         while(rs.next()){ 
+                                            String id = rs.getString("id");
+                                    %>
+                                          <tr>
+                                              <td><%=rs.getString("nome")%></td>
+                                              <td><%=rs.getString("descricao")%></td>
+                                              <td><%=rs.getString("valor")%></td>
+                                              <td> <img src="../arquivos/<%=rs.getString("imagem")%>" width="50" /> </td>
+                                              <td>
+                                                  <a href="" class="text-info" ><i class="fa fa-pencil-square"></i></a>
+                                                  <a href="" class="text-danger" ><i class="fa fa-trash"></i></a>
+                                              </td>
+                                          </tr>
+                                    <%    }
+                                    }catch(Exception e){
+                                        out.print(e);
+                                    }
+                                
+                                %>
+                               
                             </tbody>
                         </table>
                     </div>
