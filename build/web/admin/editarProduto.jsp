@@ -50,7 +50,7 @@
                             while(rs.next()){ %>
                                 <div class="container-fluid px-4">
                                     <small>Formulário de atualização de produto</small>
-                                    <form action="config/editarProduto.jsp?id=<%=rs.getString("id")%>" method="POST">
+                                    <form action="config/editarProduto.jsp?id=<%=rs.getString("id")%>&imagem=<%=rs.getString("imagem")%>" method="POST" enctype="multipart/form-data">
                                         <div class="mb-3">
                                             <label class="form-label">Nome do produto</label>
                                             <input type="text" class="form-control" value="<%=rs.getString("nome")%>" name="nome" placeholder="Nome do produto"/> 
