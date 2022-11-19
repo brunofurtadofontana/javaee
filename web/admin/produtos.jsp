@@ -1,6 +1,6 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="org.postgresql.Driver" %>
-
+<%@ page import="java.io.File" %>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -87,7 +87,7 @@
                                     String usuario = "postgres";
                                     String senhaBD = "admin";
                                     try{
-                                        Class.forName("org.postgresql.Driver");
+                                         Class.forName("org.postgresql.Driver");
                                          con = DriverManager.getConnection(url,usuario,senhaBD);
                                          st = con.createStatement();
                                          rs = st.executeQuery("SELECT *FROM produtos ORDER BY id DESC");
@@ -100,10 +100,28 @@
                                               <td><%=rs.getString("valor")%></td>
                                               <td> <img src="../arquivos/<%=rs.getString("imagem")%>" width="50" /> </td>
                                               <td>
-                                                  <a href="" class="text-info" ><i class="fa fa-pencil-square"></i></a>
-                                                  <a href="" class="text-danger" ><i class="fa fa-trash"></i></a>
+                                                  <a href="editarProduto.jsp?id=<%=rs.getString("id")%>" class="text-info" ><i class="fa fa-pencil-square"></i></a>
+                                                  <a href="" class="text-danger" data-bs-toggle="modal" data-bs-target="#exampleModal<% out.print(id); %>" ><i class="fa fa-trash"></i></a>
                                               </td>
                                           </tr>
+                                          <!-- Modal Excluir -->
+                                            <div class="modal fade" id="exampleModal<% if(id==id)out.print(id); %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                              <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                  <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir usuário</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                    Tem certeza que deseja excluir <%=rs.getString("nome")%> ??
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                    <a href="produtos.jsp?funcao=excluir&id=<%=rs.getString(1)%>&imagem=<%=rs.getString("imagem")%>" class="btn btn-danger">Excluir</a>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
                                     <%    }
                                     }catch(Exception e){
                                         out.print(e);
@@ -114,6 +132,23 @@
                             </tbody>
                         </table>
                     </div>
+                    <%
+                        if(request.getParameter("funcao")!= null && request.getParameter("funcao").equals("excluir")){
+                            String id = request.getParameter("id");
+                            String nameImg = request.getParameter("imagem");
+                            File file = new File("C:\\Users\\Alunos\\Documents\\WebSite\\build\\web\\arquivos\\"+nameImg);
+                            file.delete();
+                            try{
+                                Class.forName("org.postgresql.Driver");
+                                con = DriverManager.getConnection(url,usuario,senhaBD);
+                                st = con.createStatement();
+                                st.executeUpdate("DELETE from produtos WHERE id = '"+id+"' ");
+                                response.sendRedirect("produtos.jsp?status=3");//Registro deletado com sucesso
+                            }catch(Exception e){
+                                out.println(e);
+                            }
+                        }
+                    %>  
                 </main>
               
                 <jsp:include page="includes/footer.jsp" />
